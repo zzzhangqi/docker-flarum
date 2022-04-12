@@ -1,5 +1,15 @@
 #!/usr/bin/env sh
 
+if [ "$(ls -A /flarum/app)" = "" ]; then
+    echo "directory \"/flarum/app\" empty"
+    cp -R /flarum/apps/* /flarum/app
+fi
+
+if [ ! -f "/flarum/app/.nginx.conf" ]; then
+  echo "File \"/flarum/app/.nginx.conf\" not exists"
+  cp /flarum/apps/.nginx.conf /flarum/app/.nginx.conf
+fi
+
 # Required env variables
 if [ -z "${DB_PASS}" ]; then
   echo "[ERROR] Mariadb database password must be set !"
